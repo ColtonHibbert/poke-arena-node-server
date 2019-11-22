@@ -1,0 +1,25 @@
+{
+  "name": "poke-arena-node-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node - experimental-modules server.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ColtonHibbert/poke-arena-node-server.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ColtonHibbert/poke-arena-node-server/issues"
+  },
+  "homepage": "https://github.com/ColtonHibbert/poke-arena-node-server#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-graphql": "^0.9.0",
+    "graphql": "^14.5.8"
+  }
+}
