@@ -1,12 +1,13 @@
 //const { buildSchema } = require('graphql');
 //export const graphqlHTTP = require('express-graphql');
-import {
+import GQL from 'graphql';
+const {
     graphql,
     GraphQLSchema,
     GraphQLObjectType,
     GraphQLString,
     GraphQLList
-} from 'graphql';
+} = GQL;
 
 const waterPokemonArray = [
     {
@@ -22,7 +23,7 @@ const waterPokemonArray = [
 ];
 
 const waterType =  new GraphQLObjectType({
-    name: "Water Pokemon",
+    name: "waterType",
     fields: () => ({
         id: { type: GraphQLString},
         description: { type: GraphQLString },
@@ -40,7 +41,7 @@ let schema = new GraphQLSchema({
                    return "squiiiiirrrrtle"
                }
            },
-            waterpokemon: {
+            squirtle: {
                type: waterType,
                resolve() {
                    return waterPokemonArray[0];

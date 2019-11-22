@@ -2,21 +2,25 @@ import express from 'express';
 const app = express();
 const port = 3001;
 import schema, { graphql } from './schema.mjs';
+import cors from 'cors';
+
+app.use(cors());
 
 app.get("/test", (req, res) => {
-    console.log("get was pinged")
+    console.log("get test was pinged")
     let query = `{
         pokesound,
-        pokemon {
+        squirtle {
             name
         },
-        pokemons {
+        waterpokemons {                     
             name,
             description
         }
     }`;
     graphql(schema, query).then(result => {
-        res.json(result);
+        console.log(result)
+        res.send(result);
     });
 });
 
