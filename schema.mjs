@@ -6,7 +6,8 @@ const {
     GraphQLSchema,
     GraphQLObjectType,
     GraphQLString,
-    GraphQLList
+    GraphQLList,
+    buildSchema
 } = GQL;
 
 const waterPokemonArray = [
@@ -22,57 +23,71 @@ const waterPokemonArray = [
     }
 ];
 
-const waterType =  new GraphQLObjectType({
-    name: "waterType",
-    fields: () => ({
-        id: { type: GraphQLString},
-        description: { type: GraphQLString },
-        name: { type: GraphQLString }
-    })
-})
+export const root = {
+    pokesound: () => {
+        return "squiiiiirrrrtle"
+    },
+    waterpokemons: () => {
+        return waterPokemonArray
+    },
+    squirtle: () => {
+        return waterPokemonArray[0]
+    },
+    polywag: () => {
+        return waterPokemonArray[1]
+    }
+}
 
-let schema = new GraphQLSchema({
-   query: new GraphQLObjectType({
-       name: "RootQueryType",
-       fields: {
-           pokesound: {
-               type: GraphQLString,
-               resolve() {
-                   return "squiiiiirrrrtle"
-               }
-           },
-            squirtle: {
-               type: waterType,
-               resolve() {
-                   return waterPokemonArray[0];
-               }
-           },
-           waterpokemons: {
-               type: new GraphQLList(waterType),
-               resolve() {
-                   return waterPokemonArray
-               }
-           }
-       }
-   }) 
-})
+// const waterType =  new GraphQLObjectType({
+//     name: "waterType",
+//     fields: () => ({
+//         id: { type: GraphQLString},
+//         description: { type: GraphQLString },
+//         name: { type: GraphQLString }
+//     })
+// })
 
-export { graphql };
+// let schema = new GraphQLSchema({
+//    query: new GraphQLObjectType({
+//        name: "RootQueryType",
+//        fields: {
+//            pokesound: {
+//                type: GraphQLString,
+//                resolve() {
+//                    return "squiiiiirrrrtle"
+//                }
+//            },
+//             squirtle: {
+//                type: waterType,
+//                resolve() {
+//                    return waterPokemonArray[0];
+//                }
+//            },
+//            waterpokemons: {
+//                type: new GraphQLList(waterType),
+//                resolve() {
+//                    return waterPokemonArray
+//                }
+//            }
+//        }
+//    }) 
+// })
+
+const schema = buildSchema(`
+    type WaterType {
+        description: String,
+        id: Int,
+        name: String,
+    }
+    type Query {
+        pokesound: String,
+        waterpokemon: [WaterType],
+        squirtle: WaterType,
+        polywag: WaterType
+    }
+`)
+
+
+
+//export { graphql };
 export default schema;
-
-// export const schema = buildSchema(`
-//     type Pokemon {
-//         id: Int
-//         name: String
-//     }
-// `)
-
-
-// const root = {
-//     getPokemon: () => {
-//         return {
-//             id: 1,
-//             name: "Charizard"
-//         }
-//     }
-// }
